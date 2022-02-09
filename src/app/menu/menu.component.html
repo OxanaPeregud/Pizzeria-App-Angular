@@ -11,7 +11,7 @@
 
   <div fxFlex>
     <mat-grid-list cols="2" rowHeight="350px">
-      <mat-grid-tile *ngFor="let pizza of pizzas">
+      <mat-grid-tile *ngFor="let pizza of pizzas" (click)="onSelect(pizza)">
         <img height="350px" src={{pizza.image}} alt={{pizza.name}}>
         <mat-grid-tile-footer>
           <h1>{{pizza.name | uppercase}}</h1>
@@ -19,5 +19,7 @@
       </mat-grid-tile>
     </mat-grid-list>
   </div>
+
+  <app-pizza-detail [pizza]="selectedPizza"></app-pizza-detail>
 
 </div>

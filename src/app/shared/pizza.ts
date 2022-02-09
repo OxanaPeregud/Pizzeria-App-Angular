@@ -1,3 +1,5 @@
+import {Comment} from './comment';
+
 export class Pizza {
   id!: string;
   name!: string;
@@ -6,4 +8,5 @@ export class Pizza {
   label!: string;
   price!: string;
   description!: string;
+  comments!: Comment[];
 }
