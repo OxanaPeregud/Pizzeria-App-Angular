@@ -13,12 +13,16 @@ import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
 import {PizzaDetailComponent} from './pizza-detail/pizza-detail.component';
 import '@angular/common/locales/global/ru';
+import {HeaderComponent} from './header/header.component';
+import {FooterComponent} from './footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
-    PizzaDetailComponent
+    PizzaDetailComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
