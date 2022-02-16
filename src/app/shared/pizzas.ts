@@ -32,11 +32,11 @@ export const PIZZAS: Pizza[] = [
   },
   {
     id: '1',
-    name: 'Bonfesto',
+    name: 'Бонфесто',
     image: '/assets/images/bonfesto.png',
-    featured: true,
+    featured: false,
     label: 'Новая',
-    price: '20.10',
+    price: '17.89',
     description: 'Кремчиз и шпинат, бекон, курица, грибы, томаты, моцарелла, смесь 3х сыров, шарики моцарелла в кунжуте, чипсы из пармезана',
     comments: [
       {
@@ -51,7 +51,7 @@ export const PIZZAS: Pizza[] = [
     id: '2',
     name: 'Альпийская',
     image: '/assets/images/alpen.png',
-    featured: true,
+    featured: false,
     label: '',
     price: '20.10',
     description: 'Мясная пицца с пикантной пепперони, альпийскими колбасками, Моцареллой, луком и соусом Барбекю',
@@ -74,7 +74,7 @@ export const PIZZAS: Pizza[] = [
     id: '3',
     name: 'Веганская',
     image: '/assets/images/vegan.png',
-    featured: true,
+    featured: false,
     label: 'Вегетарианская',
     price: '18.60',
     description: 'Томатный соус, веганский сыр, томаты, шампиньоны, лук, сладкий зеленый перец, маслины',
@@ -87,4 +87,56 @@ export const PIZZAS: Pizza[] = [
       },
     ]
   },
+  {
+    id: '4',
+    name: 'Домашняя',
+    image: '/assets/images/home.png',
+    featured: true,
+    label: '',
+    price: '15.11',
+    description: 'Пикантная пепперони, ветчина, соленые огурчики, томаты, моцарелла, томатный соус',
+    comments: [
+      {
+        rating: 5,
+        comment: 'Очень вкусная пицца!',
+        author: 'Катя',
+        date: '2022-02-05'
+      },
+      {
+        rating: 3,
+        comment: 'Мне не очень понравилась, слишком острый соус',
+        author: 'Володя',
+        date: '2022-02-11'
+      },
+    ]
+  },
+  {
+    id: '5',
+    name: 'Сицилийская',
+    image: '/assets/images/sicilian.png',
+    featured: false,
+    label: 'Острая',
+    price: '24.60',
+    description: 'Острые колбаски чоризо, соус барбекю, томаты, красный лук, моцарелла, томатный соус',
+    comments: [
+      {
+        rating: 5,
+        comment: 'Вкусно и аппетитно!',
+        author: 'Миша',
+        date: '2022-02-08'
+      },
+      {
+        rating: 5,
+        comment: 'Мне понравилась',
+        author: 'Антон',
+        date: '2022-02-07'
+      },
+      {
+        rating: 5,
+        comment: 'Всем рекомендую, очень вкусно',
+        author: 'Люба',
+        date: '2022-02-05'
+      },
+    ]
+  }
 ];

@@ -15,6 +15,10 @@ import {PizzaDetailComponent} from './pizza-detail/pizza-detail.component';
 import '@angular/common/locales/global/ru';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
+import {PizzaService} from "./services/pizza.service";
+import {HomeComponent} from './home/home.component';
+import {AboutComponent} from './about/about.component';
+import {ContactComponent} from './contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,10 @@ import {FooterComponent} from './footer/footer.component';
     MenuComponent,
     PizzaDetailComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    HomeComponent,
+    AboutComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +42,9 @@ import {FooterComponent} from './footer/footer.component';
     MatCardModule,
     MatButtonModule
   ],
-  providers: [],
+  providers: [
+    PizzaService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
