@@ -13,4 +13,12 @@ export class PizzaService {
   public getPizzas(): Pizza[] {
     return PIZZAS;
   }
+
+  public getFeaturedPizzas(): Pizza[] {
+    return PIZZAS.filter(pizza => pizza.featured);
+  }
+
+  public getPizza(id: string): Pizza {
+    return PIZZAS.filter(pizza => pizza.id === id)[0];
+  }
 }

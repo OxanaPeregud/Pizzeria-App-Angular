@@ -3,6 +3,7 @@ import {HomeComponent} from "../home/home.component";
 import {MenuComponent} from "../menu/menu.component";
 import {ContactComponent} from "../contact/contact.component";
 import {AboutComponent} from "../about/about.component";
+import {PizzaDetailComponent} from "../pizza-detail/pizza-detail.component";
 
 export const routes: Routes = [
   {
@@ -16,6 +17,10 @@ export const routes: Routes = [
   {
     path: 'menu',
     component: MenuComponent
+  },
+  {
+    path: 'pizza-detail/:id',
+    component: PizzaDetailComponent
   },
   {
     path: 'contact',

@@ -11,7 +11,7 @@
 
   <div fxFlex>
     <mat-grid-list cols="3" rowHeight="3:2">
-      <mat-grid-tile *ngFor="let pizza of pizzas" (click)="onSelect(pizza)">
+      <mat-grid-tile *ngFor="let pizza of pizzas" [routerLink]="['/pizza-detail', pizza.id]">
         <img class="image" src={{pizza.image}} alt={{pizza.name}}>
         <mat-grid-tile-footer>
           <h1>{{pizza.name | uppercase}}</h1>
@@ -19,7 +19,5 @@
       </mat-grid-tile>
     </mat-grid-list>
   </div>
-
-  <app-pizza-detail [pizza]="selectedPizza"></app-pizza-detail>
 
 </div>
