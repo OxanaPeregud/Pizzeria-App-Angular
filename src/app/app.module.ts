@@ -21,6 +21,11 @@ import {AboutComponent} from './about/about.component';
 import {ContactComponent} from './contact/contact.component';
 import {LoginComponent} from './login/login.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatSelectModule} from "@angular/material/select";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatInputModule} from "@angular/material/input";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 @NgModule({
   declarations: [
@@ -44,7 +49,13 @@ import {MatDialogModule} from "@angular/material/dialog";
     MatGridListModule,
     MatCardModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    FormsModule,
+    MatSlideToggleModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatCheckboxModule
   ],
   providers: [
     PizzaService
