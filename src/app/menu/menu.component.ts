@@ -10,14 +10,14 @@ import {PizzaService} from "../services/pizza.service";
 export class MenuComponent implements OnInit {
 
   public pizzas!: Pizza[];
-
   public selectedPizza!: Pizza;
 
   constructor(private pizzaService: PizzaService) {
   }
 
   ngOnInit(): void {
-    this.pizzas = this.pizzaService.getPizzas();
+    this.pizzaService.getPizzasWithDelay()
+      .subscribe(pizzas => this.pizzas = pizzas);
   }
 
   public onSelect(pizza: Pizza): void {

@@ -1,8 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {Pizza} from "../shared/pizza";
 import {PizzaService} from "../services/pizza.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Params} from "@angular/router";
 import {Location} from "@angular/common";
+import {switchMap} from "rxjs";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Comment} from "../shared/comment";
 
 @Component({
   selector: 'app-pizza-detail',
@@ -12,22 +15,89 @@ import {Location} from "@angular/common";
 export class PizzaDetailComponent implements OnInit {
 
   public pizza!: Pizza;
+  public pizzasIds!: string[];
+  public previousPizzaId!: string;
+  public nextPizzaId!: string;
+  public commentForm!: FormGroup;
+  public comment!: Comment;
+
+  public commentFormErrors: any = {
+    'rating': '',
+    'comment': '',
+    'author': ''
+  };
+
+  private commentValidationMessages: any = {
+    'rating': {
+      'min': 'Рейтинг должен быть от 1 до 5',
+    },
+    'comment': {
+      'required': 'Напишите отзыв',
+    },
+    'author': {
+      'required': 'Введите свое имя',
+      'minlength': 'Имя должно содержать как минимум 2 символа',
+      'maxlength': 'Имя не может включать более 25 символов',
+    }
+  };
 
   constructor(private pizzaService: PizzaService,
               private route: ActivatedRoute,
-              private location: Location) {
+              private location: Location,
+              private fb: FormBuilder) {
+    this.createCommentForm();
   }
 
   ngOnInit(): void {
     this.getPizzaDetails();
   }
 
-  public getPizzaDetails(): void {
-    let id = this.route.snapshot.params['id'];
-    this.pizza = this.pizzaService.getPizza(id);
-  }
-
   public goBack(): void {
     this.location.back();
+  }
+
+  public onSubmit(): void {
+    this.comment = this.commentForm.value;
+    this.pizza.comments.push(this.comment);
+    this.resetCommentForm();
+  }
+
+  private resetCommentForm(): void {
+    this.commentForm.reset({
+      rating: 0,
+      author: '',
+      comment: '',
+      date: new Date()
+    });
+  }
+
+  private getPizzaDetails(): void {
+    this.pizzaService.getPizzasIds()
+      .subscribe((pizzasIds) => this.pizzasIds = pizzasIds);
+    this.route.params.pipe(switchMap((params: Params) => this.pizzaService.getPizza(params['id'])))
+      .subscribe(pizza => {
+        this.pizza = pizza;
+        this.setPreviousAndNextPizza(pizza.id);
+      });
+  }
+
+  private setPreviousAndNextPizza(pizzaId: string): void {
+    const index: number = this.pizzasIds?.indexOf(pizzaId);
+    this.previousPizzaId = this.pizzasIds[(this.pizzasIds.length + index - 1) % this.pizzasIds.length];
+    this.nextPizzaId = this.pizzasIds[(this.pizzasIds.length + index + 1) % this.pizzasIds.length];
+    this.resetCommentForm();
+  }
+
+  private createCommentForm() {
+    this.commentForm = this.fb.group({
+      rating: [0, Validators.min(1)],
+      author: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
+      comment: ['', Validators.required],
+      date: new Date()
+    });
+
+    this.commentForm.valueChanges
+      .subscribe(data =>
+        this.pizzaService.onFormValueChanged(this.commentForm, this.commentFormErrors, this.commentValidationMessages, data));
   }
 }

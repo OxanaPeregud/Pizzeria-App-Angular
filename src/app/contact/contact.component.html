@@ -36,22 +36,19 @@
 
         <p>
           <mat-form-field class="half-width">
-            <input matInput formControlName="firstname" placeholder="Имя" type="text">
+            <input matInput formControlName="firstname" placeholder="Имя" type="text" required>
 
-            <mat-error
-              *ngIf="feedbackForm.get('firstname')?.hasError('required') &&
-              feedbackForm.get('firstname')?.touched">
-              Введите имя
+            <mat-error *ngIf="feedbackFormErrors.firstname">
+              {{feedbackFormErrors.firstname}}
             </mat-error>
 
           </mat-form-field>
 
           <mat-form-field class="half-width">
-            <input matInput formControlName="lastname" placeholder="Фамилия" type="text">
+            <input matInput formControlName="lastname" placeholder="Фамилия" type="text" required>
 
-            <mat-error *ngIf="feedbackForm.get('lastname')?.hasError('required') &&
-            feedbackForm.get('lastname')?.touched">
-              Введите фамилию
+            <mat-error *ngIf="feedbackFormErrors.lastname">
+              {{feedbackFormErrors.lastname}}
             </mat-error>
 
           </mat-form-field>
@@ -59,22 +56,20 @@
 
         <p>
           <mat-form-field class="half-width">
-            <input matInput formControlName="telNumber" placeholder="Номер телефона" type="tel">
+            <input matInput formControlName="telNumber" placeholder="Номер телефона" type="tel" pattern="[0-9]*"
+                   required>
 
-            <mat-error
-              *ngIf="feedbackForm.get('telNumber')?.hasError('required') &&
-              feedbackForm.get('telNumber')?.touched">
-              Введите номер телефона
+            <mat-error *ngIf="feedbackFormErrors.telNumber">
+              {{feedbackFormErrors.telNumber}}
             </mat-error>
 
           </mat-form-field>
 
           <mat-form-field class="half-width">
-            <input matInput formControlName="email" placeholder="Электронная почта" type="email">
+            <input matInput formControlName="email" placeholder="Электронная почта" type="email" required>
 
-            <mat-error *ngIf="feedbackForm.get('email')?.hasError('required') &&
-            feedbackForm.get('email')?.touched">
-              Введите электронную почту
+            <mat-error *ngIf="feedbackFormErrors.email">
+              {{feedbackFormErrors.email}}
             </mat-error>
 
           </mat-form-field>
