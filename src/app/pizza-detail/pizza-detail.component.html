@@ -13,7 +13,7 @@
           <h3>{{pizza.name | uppercase}}</h3>
         </mat-card-title>
       </mat-card-header>
-      <img mat-card-image src="{{pizza.image}}" alt={{pizza.name}}>
+      <img mat-card-image src="{{BaseURL + pizza.image}}" alt={{pizza.name}}>
       <mat-card-content>
         <p>{{pizza.description}}</p>
         <p>{{pizza.price}} руб.</p>

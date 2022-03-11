@@ -27,6 +27,9 @@ import {MatInputModule} from "@angular/material/input";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatSliderModule} from "@angular/material/slider";
+import {baseURL} from "./shared/baseurl";
+import {HttpService} from "./services/http.service";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -58,10 +61,16 @@ import {MatSliderModule} from "@angular/material/slider";
     MatInputModule,
     MatCheckboxModule,
     MatProgressSpinnerModule,
-    MatSliderModule
+    MatSliderModule,
+    HttpClientModule
   ],
   providers: [
-    PizzaService
+    PizzaService,
+    {
+      provide: 'BaseURL',
+      useValue: baseURL
+    },
+    HttpService
   ],
   bootstrap: [AppComponent]
 })

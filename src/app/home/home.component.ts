@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Pizza} from "../shared/pizza";
 import {PizzaService} from "../services/pizza.service";
 
@@ -14,23 +14,31 @@ export class HomeComponent implements OnInit {
   private pizzas!: Pizza[];
   private featuredPizzas!: Pizza[];
 
-  constructor(private pizzaService: PizzaService) {
+  constructor(@Inject('BaseURL') public BaseURL: string,
+              private pizzaService: PizzaService) {
   }
 
   ngOnInit() {
-    this.setPromotionPizzas().then(() => {
-      this.displayFeaturedPizzas();
-    });
+    this.setPromotionPizzas();
   }
 
-  private async setPromotionPizzas() {
+  private setPromotionPizzas() {
     this.pizzaService.getPizzas()
-      .subscribe(pizzas => this.pizzas = pizzas);
-    this.pizzaService.getFeaturedPizzas()
-      .subscribe(featuredPizzas => this.featuredPizzas = featuredPizzas);
+      .subscribe(pizzas => {
+        this.pizzas = pizzas;
+        this.setFeaturedPizzas();
+      });
   }
 
-  private displayFeaturedPizzas(): void {
+  private setFeaturedPizzas() {
+    this.pizzaService.getFeaturedPizzas()
+      .subscribe(featuredPizzas => {
+        this.featuredPizzas = featuredPizzas;
+        this.displayFeaturedPizzas();
+      });
+  }
+
+  private displayFeaturedPizzas() {
     if (this.featuredPizzas.length >= 2) {
       this.firstPromotion = this.featuredPizzas[0];
       this.secondPromotion = this.featuredPizzas[1];

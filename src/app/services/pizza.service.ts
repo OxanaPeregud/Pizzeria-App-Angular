@@ -1,41 +1,45 @@
 import {Injectable} from '@angular/core';
 import {Pizza} from "../shared/pizza";
-import {PIZZAS} from "../shared/pizzas";
-import {delay, Observable, of} from "rxjs";
+import {delay, map, Observable} from "rxjs";
 import {FormGroup} from "@angular/forms";
+import {HttpClient} from "@angular/common/http";
+import {baseURL} from "../shared/baseurl";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PizzaService {
 
-  constructor() {
+  public pizzasLink: string = "pizzas";
+  public feedbackLink: string = "feedback";
+
+  constructor(private http: HttpClient) {
   }
 
   public getPizzas(): Observable<Pizza[]> {
-    return of(PIZZAS);
+    return this.http.get<Pizza[]>(baseURL + this.pizzasLink);
   }
 
   public getPizzasWithDelay(): Observable<Pizza[]> {
-    return of(PIZZAS)
+    return this.http.get<Pizza[]>(baseURL + this.pizzasLink)
       .pipe(
         delay(2000)
       );
   }
 
   public getFeaturedPizzas(): Observable<Pizza[]> {
-    return of(PIZZAS.filter(pizza => pizza.featured));
+    return this.http.get<Pizza[]>(baseURL + this.pizzasLink + "?featured=true");
   }
 
   public getPizza(id: string): Observable<Pizza> {
-    return of(PIZZAS.filter(pizza => pizza.id === id)[0]);
+    return this.http.get<Pizza>(baseURL + this.pizzasLink + "/" + id);
   }
 
   public getPizzasIds(): Observable<string[]> {
-    return of(PIZZAS.map(pizza => pizza.id));
+    return this.getPizzas().pipe(map(pizzas => pizzas.map(pizza => pizza.id)));
   }
 
-  public onFormValueChanged(formGroup: FormGroup, formErrors: any, validationMessages: any, data?: any) {
+  public onFormValueChanged(formGroup: FormGroup, formErrors: any, validationMessages: any) {
     if (!formGroup) {
       return;
     }

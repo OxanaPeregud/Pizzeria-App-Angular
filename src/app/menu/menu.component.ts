@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Pizza} from "../shared/pizza";
 import {PizzaService} from "../services/pizza.service";
 
@@ -12,7 +12,8 @@ export class MenuComponent implements OnInit {
   public pizzas!: Pizza[];
   public selectedPizza!: Pizza;
 
-  constructor(private pizzaService: PizzaService) {
+  constructor(@Inject('BaseURL') public BaseURL: string,
+              private pizzaService: PizzaService) {
   }
 
   ngOnInit(): void {

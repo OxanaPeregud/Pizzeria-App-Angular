@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ContactType, Feedback} from "../shared/feedback";
 import {PizzaService} from "../services/pizza.service";
+import {HttpService} from "../services/http.service";
 
 @Component({
   selector: 'app-contact',
@@ -43,7 +44,8 @@ export class ContactComponent implements OnInit {
   };
 
   constructor(private fb: FormBuilder,
-              private pizzaService: PizzaService) {
+              private pizzaService: PizzaService,
+              private httpService: HttpService) {
     this.createForm();
   }
 
@@ -52,6 +54,7 @@ export class ContactComponent implements OnInit {
 
   public onSubmit() {
     this.feedback = this.feedbackForm.value;
+    this.httpService.save(this.feedback, this.pizzaService.feedbackLink);
     this.feedbackForm.reset({
       firstname: '',
       lastname: '',
@@ -75,7 +78,7 @@ export class ContactComponent implements OnInit {
     });
 
     this.feedbackForm.valueChanges
-      .subscribe(data =>
-        this.pizzaService.onFormValueChanged(this.feedbackForm, this.feedbackFormErrors, this.feedbackValidationMessages, data));
+      .subscribe(() =>
+        this.pizzaService.onFormValueChanged(this.feedbackForm, this.feedbackFormErrors, this.feedbackValidationMessages));
   }
 }

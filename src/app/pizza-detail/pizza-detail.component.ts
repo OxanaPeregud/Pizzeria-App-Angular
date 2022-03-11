@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Pizza} from "../shared/pizza";
 import {PizzaService} from "../services/pizza.service";
 import {ActivatedRoute, Params} from "@angular/router";
@@ -6,6 +6,7 @@ import {Location} from "@angular/common";
 import {switchMap} from "rxjs";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Comment} from "../shared/comment";
+import {HttpService} from "../services/http.service";
 
 @Component({
   selector: 'app-pizza-detail',
@@ -41,10 +42,12 @@ export class PizzaDetailComponent implements OnInit {
     }
   };
 
-  constructor(private pizzaService: PizzaService,
+  constructor(@Inject('BaseURL') public BaseURL: string,
+              private pizzaService: PizzaService,
               private route: ActivatedRoute,
               private location: Location,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,
+              private httpService: HttpService) {
     this.createCommentForm();
   }
 
@@ -59,6 +62,7 @@ export class PizzaDetailComponent implements OnInit {
   public onSubmit(): void {
     this.comment = this.commentForm.value;
     this.pizza.comments.push(this.comment);
+    this.httpService.update(this.pizza, this.pizzaService.pizzasLink + "/" + this.pizza.id);
     this.resetCommentForm();
   }
 
@@ -97,7 +101,7 @@ export class PizzaDetailComponent implements OnInit {
     });
 
     this.commentForm.valueChanges
-      .subscribe(data =>
-        this.pizzaService.onFormValueChanged(this.commentForm, this.commentFormErrors, this.commentValidationMessages, data));
+      .subscribe(() =>
+        this.pizzaService.onFormValueChanged(this.commentForm, this.commentFormErrors, this.commentValidationMessages));
   }
 }
