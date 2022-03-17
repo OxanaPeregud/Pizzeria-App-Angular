@@ -31,6 +31,10 @@ import {baseURL} from "./shared/baseurl";
 import {HttpService} from "./services/http.service";
 import {HttpClientModule} from "@angular/common/http";
 import {PopupComponent} from './popup/popup.component';
+import {OrderComponent} from './order/order.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatIconModule} from "@angular/material/icon";
+import {MatBadgeModule} from "@angular/material/badge";
 
 @NgModule({
   declarations: [
@@ -43,7 +47,8 @@ import {PopupComponent} from './popup/popup.component';
     AboutComponent,
     ContactComponent,
     LoginComponent,
-    PopupComponent
+    PopupComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +69,10 @@ import {PopupComponent} from './popup/popup.component';
     MatCheckboxModule,
     MatProgressSpinnerModule,
     MatSliderModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule,
+    MatIconModule,
+    MatBadgeModule
   ],
   providers: [
     PizzaService,
