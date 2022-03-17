@@ -30,6 +30,7 @@ import {MatSliderModule} from "@angular/material/slider";
 import {baseURL} from "./shared/baseurl";
 import {HttpService} from "./services/http.service";
 import {HttpClientModule} from "@angular/common/http";
+import {PopupComponent} from './popup/popup.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {HttpClientModule} from "@angular/common/http";
     HomeComponent,
     AboutComponent,
     ContactComponent,
-    LoginComponent
+    LoginComponent,
+    PopupComponent
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,6 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {Pizza} from "../shared/pizza";
 import {PizzaService} from "../services/pizza.service";
 import {ActivatedRoute, Params} from "@angular/router";
-import {Location} from "@angular/common";
 import {switchMap} from "rxjs";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Comment} from "../shared/comment";
@@ -45,7 +44,6 @@ export class PizzaDetailComponent implements OnInit {
   constructor(@Inject('BaseURL') public BaseURL: string,
               private pizzaService: PizzaService,
               private route: ActivatedRoute,
-              private location: Location,
               private fb: FormBuilder,
               private httpService: HttpService) {
     this.createCommentForm();
@@ -55,15 +53,20 @@ export class PizzaDetailComponent implements OnInit {
     this.getPizzaDetails();
   }
 
-  public goBack(): void {
-    this.location.back();
-  }
-
   public onSubmit(): void {
     this.comment = this.commentForm.value;
     this.pizza.comments.push(this.comment);
     this.httpService.update(this.pizza, this.pizzaService.pizzasLink + "/" + this.pizza.id);
     this.resetCommentForm();
+  }
+
+  public addToOrder(): void {
+    this.openOrderPopup();
+    this.pizzaService.orderedPizzas.push(this.pizza);
+  }
+
+  public openOrderPopup(): void {
+    this.pizzaService.openMessagePopup("Пицца добавлена в корзину!");
   }
 
   private resetCommentForm(): void {

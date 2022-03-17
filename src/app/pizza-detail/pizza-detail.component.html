@@ -24,9 +24,8 @@
           <span class="fa fa-angle-double-left fa-3x"></span>
         </button>
 
-        <button mat-button (click)="goBack()">BACK</button>
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
+        <button mat-button routerLink='/menu'>МЕНЮ</button>
+        <button mat-button (click)="addToOrder()">ДОБАВИТЬ В КОРЗИНУ</button>
 
         <span class="flex-spacer"></span>
         <button mat-button [routerLink]="['/pizza-detail', nextPizzaId]">

@@ -4,6 +4,8 @@ import {delay, map, Observable} from "rxjs";
 import {FormGroup} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {baseURL} from "../shared/baseurl";
+import {MatDialog} from "@angular/material/dialog";
+import {PopupComponent} from "../popup/popup.component";
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +14,10 @@ export class PizzaService {
 
   public pizzasLink: string = "pizzas";
   public feedbackLink: string = "feedback";
+  public orderedPizzas: Pizza[] = [];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private dialog: MatDialog) {
   }
 
   public getPizzas(): Observable<Pizza[]> {
@@ -57,5 +61,14 @@ export class PizzaService {
         }
       }
     }
+  }
+
+  public openMessagePopup(message: string): void {
+    this.dialog.open(PopupComponent, {
+        width: '500px',
+        height: '110px',
+        data: message
+      }
+    );
   }
 }
