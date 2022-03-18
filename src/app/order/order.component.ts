@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {PizzaService} from "../services/pizza.service";
+import {Pizza} from "../shared/pizza";
+import {LoginComponent} from "../login/login.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {Router} from "@angular/router";
 import {HttpService} from "../services/http.service";
-import {Pizza} from "../shared/pizza";
+import {Order} from "../shared/order";
 
 @Component({
   selector: 'app-order',
@@ -14,6 +16,7 @@ export class OrderComponent implements OnInit {
 
   public displayedColumns: string[] = ['pizza', 'price', 'count', 'sum', 'delete'];
   public totalSum!: string;
+  private order: Order = new Order();
 
   constructor(public pizzaService: PizzaService,
               private dialog: MatDialog,
@@ -66,5 +69,23 @@ export class OrderComponent implements OnInit {
       this.pizzaService.orderedPizzas.push(chosenPizza);
     }
     this.calculateTotalOrderSum();
+  }
+
+  public openLoginForm(): void {
+    this.dialog.open(LoginComponent, {
+        width: '500px',
+        height: '300px'
+      }
+    );
+  }
+
+  public onSubmit(): void {
+    this.dialogRef.close();
+    this.order.pizzas = this.pizzaService.orderedPizzas;
+    this.order.username = this.pizzaService.user.username;
+    this.order.totalSum = this.totalSum;
+    this.http.save(this.order, this.pizzaService.ordersLink);
+    this.router.navigate(['/order']);
+    this.pizzaService.orderedPizzas = [];
   }
 }

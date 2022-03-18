@@ -6,6 +6,7 @@ import {HttpClient} from "@angular/common/http";
 import {baseURL} from "../shared/baseurl";
 import {MatDialog} from "@angular/material/dialog";
 import {PopupComponent} from "../popup/popup.component";
+import {User} from "../shared/user";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,12 @@ export class PizzaService {
 
   public pizzasLink: string = "pizzas";
   public feedbackLink: string = "feedback";
+  public usersLink: string = "users";
+  public ordersLink: string = "orders";
+
   public orderedPizzas: Pizza[] = [];
+  public user: User = new User();
+  public isUserSubmitted: boolean = false;
 
   constructor(private http: HttpClient,
               private dialog: MatDialog) {
@@ -41,6 +47,14 @@ export class PizzaService {
 
   public getPizzasIds(): Observable<string[]> {
     return this.getPizzas().pipe(map(pizzas => pizzas.map(pizza => pizza.id)));
+  }
+
+  public getUser(): Observable<User> {
+    return this.http.get<User>(baseURL + this.usersLink + "?username=" + this.user.username + "&password=" + this.user.password);
+  }
+
+  public checkUsername(): Observable<User> {
+    return this.http.get<User>(baseURL + this.usersLink + "?username=" + this.user.username);
   }
 
   public onFormValueChanged(formGroup: FormGroup, formErrors: any, validationMessages: any) {

@@ -4,6 +4,7 @@ import {MenuComponent} from "../menu/menu.component";
 import {ContactComponent} from "../contact/contact.component";
 import {AboutComponent} from "../about/about.component";
 import {PizzaDetailComponent} from "../pizza-detail/pizza-detail.component";
+import {PlaceOrderComponent} from "../place-order/place-order.component";
 
 export const routes: Routes = [
   {
@@ -25,6 +26,10 @@ export const routes: Routes = [
   {
     path: 'contact',
     component: ContactComponent
+  },
+  {
+    path: 'order',
+    component: PlaceOrderComponent
   },
   {
     path: '',

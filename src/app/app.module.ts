@@ -35,6 +35,8 @@ import {OrderComponent} from './order/order.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatIconModule} from "@angular/material/icon";
 import {MatBadgeModule} from "@angular/material/badge";
+import {SignUpComponent} from './sign-up/sign-up.component';
+import {PlaceOrderComponent} from './place-order/place-order.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import {MatBadgeModule} from "@angular/material/badge";
     ContactComponent,
     LoginComponent,
     PopupComponent,
-    OrderComponent
+    OrderComponent,
+    SignUpComponent,
+    PlaceOrderComponent
   ],
   imports: [
     BrowserModule,

@@ -47,3 +47,27 @@
   <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
 
 </table>
+
+<mat-card *ngIf="pizzaService.isUserSubmitted">
+  <h3>Логин:</h3>
+  <p>{{pizzaService.user.username}}</p>
+  <h3>Телефон:</h3>
+  <p>{{pizzaService.user.telNumber}}</p>
+  <h3>Электронная почта:</h3>
+  <p>{{pizzaService.user.email}}</p>
+  <h3>Адрес доставки:</h3>
+  <p>{{pizzaService.user.street}}, {{pizzaService.user.house}}-{{pizzaService.user.apartment}}</p>
+</mat-card>
+
+<mat-dialog-actions>
+  <span class="flex-spacer"></span>
+  <button mat-button *ngIf="!pizzaService.isUserSubmitted" class="background-primary text-floral-white"
+          (click)="openLoginForm()"
+          [disabled]="totalSum == '0.00'">
+    Оформить заказ
+  </button>
+  <button mat-button *ngIf="pizzaService.isUserSubmitted" class="background-primary text-floral-white"
+          (click)="onSubmit()">
+    Оформить
+  </button>
+</mat-dialog-actions>
