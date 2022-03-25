@@ -1,6 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-
 import {PlaceOrderComponent} from './place-order.component';
+import {MatCardModule} from "@angular/material/card";
 
 describe('PlaceOrderComponent', () => {
   let component: PlaceOrderComponent;
@@ -8,7 +8,11 @@ describe('PlaceOrderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PlaceOrderComponent]
+      imports: [
+        MatCardModule
+      ],
+      declarations: [PlaceOrderComponent],
+      providers: []
     })
       .compileComponents();
   });
