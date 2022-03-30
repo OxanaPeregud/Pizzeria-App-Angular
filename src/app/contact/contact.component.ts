@@ -3,11 +3,15 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ContactType, Feedback} from "../shared/feedback";
 import {PizzaService} from "../services/pizza.service";
 import {HttpService} from "../services/http.service";
+import {expand} from "../animations/app.animation";
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+  styleUrls: ['./contact.component.scss'],
+  animations: [
+    expand()
+  ]
 })
 export class ContactComponent implements OnInit {
 

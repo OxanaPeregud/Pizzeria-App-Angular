@@ -42,7 +42,10 @@ export class PizzaService {
   }
 
   public getPizza(id: string): Observable<Pizza> {
-    return this.http.get<Pizza>(baseURL + this.pizzasLink + "/" + id);
+    return this.http.get<Pizza>(baseURL + this.pizzasLink + "/" + id)
+      .pipe(
+        delay(500)
+      );
   }
 
   public getPizzasIds(): Observable<string[]> {

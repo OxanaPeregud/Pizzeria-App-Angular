@@ -1,11 +1,19 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Pizza} from "../shared/pizza";
 import {PizzaService} from "../services/pizza.service";
+import {flyIn} from "../animations/app.animation";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  host: {
+    '[@flyIn]': 'true',
+    'style': 'display: block;'
+  },
+  animations: [
+    flyIn()
+  ]
 })
 export class HomeComponent implements OnInit {
 

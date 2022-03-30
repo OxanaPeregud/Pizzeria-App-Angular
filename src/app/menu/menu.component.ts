@@ -1,11 +1,19 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Pizza} from "../shared/pizza";
 import {PizzaService} from "../services/pizza.service";
+import {flyIn} from "../animations/app.animation";
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss']
+  styleUrls: ['./menu.component.scss'],
+  host: {
+    '[@flyIn]': 'true',
+    'style': 'display: block;'
+  },
+  animations: [
+    flyIn()
+  ]
 })
 export class MenuComponent implements OnInit {
 
@@ -17,7 +25,7 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.pizzaService.getPizzasWithDelay()
+    this.pizzaService.getPizzas()
       .subscribe(pizzas => this.pizzas = pizzas);
   }
 

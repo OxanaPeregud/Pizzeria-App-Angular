@@ -6,11 +6,15 @@ import {switchMap} from "rxjs";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Comment} from "../shared/comment";
 import {HttpService} from "../services/http.service";
+import {visibility} from "../animations/app.animation";
 
 @Component({
   selector: 'app-pizza-detail',
   templateUrl: './pizza-detail.component.html',
-  styleUrls: ['./pizza-detail.component.scss']
+  styleUrls: ['./pizza-detail.component.scss'],
+  animations: [
+    visibility()
+  ],
 })
 export class PizzaDetailComponent implements OnInit {
 
@@ -20,6 +24,7 @@ export class PizzaDetailComponent implements OnInit {
   public nextPizzaId!: string;
   public commentForm!: FormGroup;
   public comment!: Comment;
+  public visibility = 'shown';
 
   public commentFormErrors: any = {
     'rating': '',
@@ -81,8 +86,12 @@ export class PizzaDetailComponent implements OnInit {
   private getPizzaDetails(): void {
     this.pizzaService.getPizzasIds()
       .subscribe((pizzasIds) => this.pizzasIds = pizzasIds);
-    this.route.params.pipe(switchMap((params: Params) => this.pizzaService.getPizza(params['id'])))
+    this.route.params.pipe(switchMap((params: Params) => {
+      this.visibility = 'hidden';
+      return this.pizzaService.getPizza(params['id']);
+    }))
       .subscribe(pizza => {
+        this.visibility = 'shown';
         this.pizza = pizza;
         this.setPreviousAndNextPizza(pizza.id);
       });

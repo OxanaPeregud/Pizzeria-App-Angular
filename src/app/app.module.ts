@@ -37,6 +37,9 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatBadgeModule} from "@angular/material/badge";
 import {SignUpComponent} from './sign-up/sign-up.component';
 import {PlaceOrderComponent} from './place-order/place-order.component';
+import {HighlightDirective} from "./directives/highlight.directive";
+import {SpinnerComponent} from "./spinner/spinner.component";
+import {ToolbarComponent} from "./toolbar/toolbar.component";
 
 @NgModule({
   declarations: [
@@ -52,7 +55,10 @@ import {PlaceOrderComponent} from './place-order/place-order.component';
     PopupComponent,
     OrderComponent,
     SignUpComponent,
-    PlaceOrderComponent
+    PlaceOrderComponent,
+    HighlightDirective,
+    SpinnerComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,

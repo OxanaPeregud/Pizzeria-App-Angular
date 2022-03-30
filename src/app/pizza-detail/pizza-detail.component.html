@@ -6,7 +6,7 @@
      fxLayoutGap="50px"
      fxLayoutGap.xs="0">
 
-  <div fxFlex="35" *ngIf="pizza">
+  <div fxFlex="35" *ngIf="pizza" [@visibility]="visibility">
     <mat-card>
       <mat-card-header>
         <mat-card-title>
@@ -36,7 +36,9 @@
     </mat-card>
   </div>
 
-  <div fxFlex="70" *ngIf="pizza">
+  <app-spinner [hiddenData]="pizza"></app-spinner>
+
+  <div fxFlex="70" *ngIf="pizza" [@visibility]="visibility">
     <mat-list>
       <h3>Отзывы</h3>
       <mat-list-item *ngFor="let comment of pizza.comments">
