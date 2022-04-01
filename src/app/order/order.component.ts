@@ -30,7 +30,7 @@ export class OrderComponent implements OnInit {
   }
 
   public displayedPizzaList(): Pizza[] {
-    return [...new Set(this.pizzaService.orderedPizzas)]
+    return [...new Map(this.pizzaService.orderedPizzas.map(pizza => [pizza.id, pizza])).values()]
       .sort((a, b) => (
         a.name.localeCompare(b.name))
       );
@@ -54,7 +54,7 @@ export class OrderComponent implements OnInit {
   }
 
   public countPizzas(chosenPizza: Pizza): number {
-    return this.pizzaService.orderedPizzas.filter(pizza => pizza == chosenPizza).length;
+    return this.pizzaService.orderedPizzas.filter(pizza => pizza.id == chosenPizza.id).length;
   }
 
   public addPizza(chosenPizza: Pizza): void {
