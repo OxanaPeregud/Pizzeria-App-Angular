@@ -1,0 +1,20 @@
+<app-toolbar [title]="'Пиццы'"></app-toolbar>
+
+<table mat-table [dataSource]="pizzasList" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="pizza">
+    <th mat-header-cell *matHeaderCellDef>Пицца</th>
+    <td mat-cell *matCellDef="let element">{{element.name}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef>Цена за 1 шт., руб.</th>
+    <td mat-cell *matCellDef="let element">{{element.price}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+      [routerLink]="['/pizza-detail', row.id]"
+      (click)="dialogRef.close()" appHighlight></tr>
+
+</table>

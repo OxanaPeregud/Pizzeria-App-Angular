@@ -40,6 +40,7 @@ import {PlaceOrderComponent} from './place-order/place-order.component';
 import {HighlightDirective} from "./directives/highlight.directive";
 import {SpinnerComponent} from "./spinner/spinner.component";
 import {ToolbarComponent} from "./toolbar/toolbar.component";
+import {PizzasListComponent} from './pizzas-list/pizzas-list.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import {ToolbarComponent} from "./toolbar/toolbar.component";
     PlaceOrderComponent,
     HighlightDirective,
     SpinnerComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    PizzasListComponent
   ],
   imports: [
     BrowserModule,

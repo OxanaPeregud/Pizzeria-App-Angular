@@ -5,7 +5,7 @@
      fxLayoutAlign.gt-md="space-around center"
      fxLayoutGap="10px">
 
-  <mat-card *ngIf="firstPromotion" fxFlex>
+  <mat-card *ngIf="firstPromotion" [routerLink]="['/pizza-detail', firstPromotion.id]" fxFlex>
     <mat-card-header>
       <mat-card-title>
         <h3>{{firstPromotion.name | uppercase}}</h3>
@@ -18,7 +18,7 @@
     </mat-card-content>
   </mat-card>
 
-  <mat-card *ngIf="secondPromotion" fxFlex>
+  <mat-card *ngIf="secondPromotion" [routerLink]="['/pizza-detail', secondPromotion.id]" fxFlex>
     <mat-card-header>
       <mat-card-title>
         <h3>{{secondPromotion.name | uppercase}}</h3>
